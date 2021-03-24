@@ -11,7 +11,7 @@
 4) Row 2 Column 3 Div guesses left; Div score
 
 ## Logic
-1) Have Math.random() generate a random number from 1-100
+1) Have Math.random() generate a random number from 1-100 
 2) Track global State of Wins and Losses in showScore function
     - How? let score = { wins: 0, losses: 0}; An object where wins and losses are tracked. Display in Div score. 
     - Why? To keep a record of their win/losses
