@@ -38,6 +38,14 @@ section {
     height: 25px;
 }
 
+#submit-button{
+    display: block;
+}
+
+#reset-button{
+    display: none;
+}
+
 .numbers-compared-section{
     display: grid;
     width: 100px;
