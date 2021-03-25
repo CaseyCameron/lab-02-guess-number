@@ -1,4 +1,4 @@
-import { compareNumbers, resetGame, resetButtons } from './utils.js';
+import { compareNumbers, resetButtons, resetGame } from './utils.js';
 
 let correctNumber = Math.floor(Math.random() * 101);
 const userGuess = document.getElementById('user-number-input');
@@ -9,6 +9,7 @@ const button = document.getElementById('submit-button');
 const resetButton = document.getElementById('reset-button');
 
 let guessesRemaining = 4;
+guessesRemainingCounter.textContent = `You have ${guessesRemaining} guesses.`;
 const gameTally = {
     wins: 0,
     losses: 0,
@@ -21,38 +22,48 @@ button.addEventListener('click', () => {
     let guessResult = compareNumbers(userGuess.value, correctNumber);
     displayGuessResult.textContent = guessResult;
     guessesRemaining--;
-    guessesRemainingCounter.textContent = `You have ${guessesRemaining} tries left.`;
-    console.log(guessesRemainingCounter);
+    guessesRemainingCounter.textContent = `You have ${guessesRemaining} guesses left.`;
 
     if (guessesRemaining > 0 && guessResult === 'You win!'){
         gameTally.wins++;
         showGameTally.textContent = `Wins: ${gameTally.wins} / Losses: ${gameTally.losses}`;
         const playAgain = confirm('You win! Play again?');
-        if (!playAgain) return;
-
-        // else continue playing
-
-        correctNumber = Math.floor(Math.random(1) * 101);
-        guessesRemaining = 4;
-        guessesRemainingCounter.textContent = `You have ${guessesRemaining} tries left.`;
-        displayGuessResult.textContent = 'Your guess results appear here.';
-
+        if (!playAgain){
+            clearGame();
+            return;
+        } else {
+            correctNumber = Math.floor(Math.random(1) * 101);
+            guessesRemaining = 4;
+            resetGame(guessesRemaining, guessesRemainingCounter, displayGuessResult);
+            userGuess.value = '';
+        }
     } 
+
     if (guessesRemaining === 0){
         gameTally.losses++;
         showGameTally.textContent = `Wins: ${gameTally.wins} / Losses: ${gameTally.losses}`;
         const playAgain = confirm('You lose! Play again?');
-        if (!playAgain) return;
-
-        // else continue playing
-
-        correctNumber = Math.floor(Math.random(1) * 101);
-        guessesRemaining = 4;
-        guessesRemainingCounter.textContent = `You have ${guessesRemaining} tries left.`;
-        displayGuessResult.textContent = 'Your guess results appear here.';
+        if (!playAgain){
+            clearGame();
+            return;
+        } else {
+            correctNumber = Math.floor(Math.random(1) * 101);
+            guessesRemaining = 4;
+            resetGame(guessesRemaining, guessesRemainingCounter, displayGuessResult);
+            userGuess.value = '';
+        }
     }
 });
 
 resetButton.addEventListener('click', () => {
     resetButtons(resetButton, button);
 });
+
+function clearGame(){
+    correctNumber = Math.floor(Math.random(1) * 101);
+    guessesRemaining = 4;
+    resetGame(guessesRemaining, guessesRemainingCounter, displayGuessResult);
+    displayGuessResult.textContent = '';
+    guessesRemainingCounter.textContent = 'Your win/loss ratio:';
+    userGuess.value = '';
+}
