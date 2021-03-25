@@ -21,20 +21,25 @@ section {
 }
 
 .input-section{
-        width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
 }
 
 .instructions-section{
-    display: grid;
-    grid-column: span 2 / 4;
+    display: flex;
+    flex-direction: column;
+    grid-column: 2 / 4;
     width: 100%;
 }
 
 .button-section{
-    display: grid;
-    grid-column: auto;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    width: 25%;
+    align-items: center;
     height: 25px;
 }
 
@@ -47,14 +52,16 @@ section {
 }
 
 .numbers-compared-section{
-    display: grid;
+    display: flex;
+    flex-direction: column;
     width: 100px;
     height: 25px;
 }
 
 .guess-and-score-section{
-    display: grid;
-    width: 100px;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
     height: 25px;
 
 }
